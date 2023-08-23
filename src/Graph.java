@@ -37,7 +37,12 @@ public class Graph {
      * @param knoten Referenz auf Knoten, der hinzugefügt werden soll
      */
     public void knotenHinzufuegen(Knoten knoten) {
-
+        if (this.knotenAnzahl < this.knoten.length) {
+            this.knoten[this.knotenAnzahl] = knoten;
+            this.knotenAnzahl++;
+        } else {
+            System.out.println("Maximale Knotenanzahl erreict.");
+        }
     }
 
     /**
@@ -46,6 +51,35 @@ public class Graph {
      * @param gewicht Gewicht der Kante
      */
     public void kanteHinzufuegen(String von, String nach, int gewicht) {
+        int vonIndex = this.gibKnotenIndex(von);
+        int nachIndex = this.gibKnotenIndex(nach);
+        if (vonIndex>-1 && nachIndex>-1) {
+            this.adjazenzMatrix[vonIndex][nachIndex] = gewicht;
+            this.adjazenzMatrix[nachIndex][vonIndex] = gewicht;
+        }
+    }
 
+    /**
+     * Ausgabe der Knotenliste
+     */
+    public void knotenAusgeben() {
+        for (int i = 0; i < this.knotenAnzahl; i++) {
+            System.out.print("\t" + this.knoten[i].gibSchluessel());
+        }
+        System.out.println();
+    }
+
+    /**
+     * Adjazenzmatrix ausgeben
+     */
+    public void adjazenzmatrixAusgeben() {
+        this.knotenAusgeben();
+        for (int i = 0; i < this.knotenAnzahl; i++) {
+            System.out.print(this.knoten[i].gibSchluessel());
+            for (int j = 0; j < this.knotenAnzahl; j++) {
+                System.out.print("\t" + this.adjazenzMatrix[i][j]);
+            }
+            System.out.println();
+        }
     }
 }

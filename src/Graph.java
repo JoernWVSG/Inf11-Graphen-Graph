@@ -21,6 +21,8 @@ public class Graph {
     }
 
     /**
+     * Ermittelt den Index des Knotens mit dem angegebenen Schlüssel
+     *
      * @param schluessel Bezeichner des Knotens, dessen Index gefunden werden soll
      * @return Index des Knotens; -1, falls Knoten nicht gefunden wird
      */
@@ -34,6 +36,8 @@ public class Graph {
     }
 
     /**
+     * Fügt Knoten zum Graph hinzu
+     *
      * @param knoten Referenz auf Knoten, der hinzugefügt werden soll
      */
     public void knotenHinzufuegen(Knoten knoten) {
@@ -46,6 +50,8 @@ public class Graph {
     }
 
     /**
+     * Fügt eine Kante zum Graphen hinzu
+     *
      * @param von     Schluessel des Ausgangsknotens
      * @param nach    Schluessel des Zielknotens
      * @param gewicht Gewicht der Kante
@@ -53,9 +59,24 @@ public class Graph {
     public void kanteHinzufuegen(String von, String nach, int gewicht) {
         int vonIndex = this.gibKnotenIndex(von);
         int nachIndex = this.gibKnotenIndex(nach);
-        if (vonIndex>-1 && nachIndex>-1) {
+        if (vonIndex > -1 && nachIndex > -1) {
             this.adjazenzMatrix[vonIndex][nachIndex] = gewicht;
             this.adjazenzMatrix[nachIndex][vonIndex] = gewicht;
+        }
+    }
+
+    /**
+     * Fügt eine gerichtete Kante zum Graphen hinzu
+     *
+     * @param von     Schluessel des Ausgangsknotens
+     * @param nach    Schluessel des Zielknotens
+     * @param gewicht Gewicht der Kante
+     */
+    public void gerichteteKanteHinzufuegen(String von, String nach, int gewicht) {
+        int vonIndex = this.gibKnotenIndex(von);
+        int nachIndex = this.gibKnotenIndex(nach);
+        if (vonIndex > -1 && nachIndex > -1) {
+            this.adjazenzMatrix[vonIndex][nachIndex] = gewicht;
         }
     }
 

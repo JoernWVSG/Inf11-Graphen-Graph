@@ -12,5 +12,7 @@ public class Test {
         g.kanteHinzufuegen("B", "C", 1);
         g.kanteHinzufuegen("C", "D", 1);
         g.adjazenzmatrixAusgeben();
+        g.breitenSuche("D", "B");
+        g.breitenSuche("A","E");
     }
 }

@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Graph {
 
     private int knotenAnzahl;
@@ -103,4 +105,41 @@ public class Graph {
             System.out.println();
         }
     }
+
+    public Knoten breitenSuche(String start, String ziel) {
+        int startIndex = gibKnotenIndex(start);
+        int zielIndex = gibKnotenIndex(ziel);
+        ArrayList<Integer> warteSchlange = new ArrayList<Integer>();
+        // Ein paar nette Ausgaben
+        System.out.println("\nBreitensuche mit Startknoten " + start + " und Zielknoten " + ziel + ".");
+        // Alle Knoten als nicht besucht setzen
+        for (int i = 0; i < this.knotenAnzahl; i++) {
+            this.knoten[i].setzeBesucht(false);
+        }
+        // Markiere Startknoten als besucht
+        this.knoten[startIndex].setzeBesucht(true);
+        // Speichere StartknotenIndex in Warteschlange
+        warteSchlange.add(startIndex);
+        while (!warteSchlange.isEmpty()) {
+            int aktiverKnotenIndex = warteSchlange.remove(0);
+            if (aktiverKnotenIndex == zielIndex) {
+                // Zielknoten gefunden
+                System.out.println("Knoten " + this.knoten[zielIndex].gibSchluessel() + " wurde gefunden.");
+                return this.knoten[aktiverKnotenIndex];
+            } else {
+                // Füge alle noch nicht besuchten Nachbarknoten in
+                // Warteschlange ein und markiere sie als besucht
+                for (int i = 0; i < this.knotenAnzahl; i++) {
+                    if (this.adjazenzMatrix[aktiverKnotenIndex][i] > 0 && !this.knoten[i].istBesucht()) {
+                        this.knoten[i].setzeBesucht(true);
+                        warteSchlange.add(i);
+                        System.out.println("Knoten " + this.knoten[i].gibSchluessel() + " wurde besucht.");
+                    }
+                }
+            }
+        }
+        System.out.println("Zielknoten ist nicht erreichbar.");
+        return null;
+    }
+
 }

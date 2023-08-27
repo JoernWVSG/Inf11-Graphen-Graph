@@ -1,6 +1,8 @@
 public class Knoten {
 
     private String schluessel;
+    private boolean besucht;
+
 
     /**
      * @param schluessel Eindeutiger Bezeichner des Knotens
@@ -22,4 +24,13 @@ public class Knoten {
     public void setzeSchluessel(String schluessel) {
         this.schluessel = schluessel;
     }
+
+    public boolean istBesucht() {
+        return besucht;
+    }
+
+    public void setzeBesucht(boolean besucht) {
+        this.besucht = besucht;
+    }
+
 }
